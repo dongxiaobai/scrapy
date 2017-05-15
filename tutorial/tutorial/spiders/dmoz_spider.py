@@ -11,4 +11,4 @@ class DmozSpider(scrapy.Spider):
 	def parse(self,response):
 		filename = response.url.split("/")[-2]
 		with open(filename,"wb") as f:
-			f.write(response.body)
+			open(filename,'wb').write(response.body)
