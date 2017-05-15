@@ -1,6 +1,7 @@
-import scrapy
+from scrapy.spider import BaseSpider
+from scrapy.selector import HtmlXPathSelector
 
-class DmozSpider(scrapy.Spider):
+class DmozSpider(BaseSpider):
 	name = 'dmoz'
 	allowed_domains = ["dmoz.org"]
 	start_urls = [
@@ -9,6 +10,10 @@ class DmozSpider(scrapy.Spider):
 	]
 
 	def parse(self,response):
-		filename = response.url.split("/")[-2]
-		with open(filename,"wb") as f:
-			open(filename,'wb').write(response.body)
+		hxs = HtmlXPathSelector(response)
+		sites = hxs.select('//ul/li')
+		for site in sites:
+			title = site.select('a/text()').extract()
+			link = site.select('a/@href').extract()
+			desc = site.select('text(').extract()
+			print title,link,desc
