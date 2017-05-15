@@ -133,3 +133,5 @@ class MySpider(BaseSpider):
 ```
 
 - parse是默认的callback，它返回了一个Request列表，scrapy自动的根据这个列表抓取网页，每当抓到一个网页，就会调用parse_item，parse_item也会返回一个列表，scrapy又会根据这个列表去抓网页，并且抓到后调用parse_details
+
+为了让这样的工作更容易，scrapy提供了另一个spider基类，利用它我们可以方便的实现自动抓取链接. 我们要用到CrawlSpider
