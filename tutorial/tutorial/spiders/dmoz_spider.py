@@ -16,4 +16,4 @@ class DmozSpider(BaseSpider):
 			title = site.select('a/text()').extract()
 			link = site.select('a/@href').extract()
 			desc = site.select('text(').extract()
-			print title,link,desc
+			print(title,link,desc) 
